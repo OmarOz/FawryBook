@@ -58,7 +58,7 @@ User → Angular Component → Service (HTTP) → Spring Boot API → Database
  
 **Layers:**
  
-- **Pages** — Full page components (auth, home, post detail, profile, etc.)
+- **Pages** — Full page components (auth, posts, post detail, profile, etc.)
 - **Shared Components** — Reusable UI components (navbar, post card, etc.)
 - **Services** — HTTP client wrappers for each API domain
 - **Models** — TypeScript interfaces matching backend DTOs
