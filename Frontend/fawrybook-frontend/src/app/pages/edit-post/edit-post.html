@@ -1,0 +1,14 @@
+<div *ngIf="loading">Loading post...</div>
+
+<div *ngIf="error">Post not found.</div>
+
+<div *ngIf="post && !loading">
+
+  <h1>Edit Post</h1>
+
+  <app-post-form
+    [initialData]="post"
+    (formSubmit)="onSubmit($event)"
+  ></app-post-form>
+
+</div>

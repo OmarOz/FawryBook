@@ -1,0 +1,41 @@
+<!-- Main Nav Container -->
+<nav class="bg-white border-b border-slate-200 py-3 px-4">
+  <!-- min-w-0 is a trick to allow flex children to shrink below their content size -->
+  <div class="max-w-7xl mx-auto flex items-center justify-between gap-4 min-w-0">
+    
+    <!-- Logo: shrink-0 is MANDATORY to keep the logo from squashing -->
+    <a routerLink="/" class="flex items-center gap-2 text-xl font-bold text-blue-600 shrink-0">
+      <span class="text-2xl">📖</span>
+      <span class="hidden sm:inline">FawryBook</span>
+    </a>
+
+    <!-- The Slider Wrapper -->
+    <!-- flex-1 allows this section to take up all remaining space -->
+    <div class="flex-1 flex items-center justify-end gap-3 overflow-x-auto flex-nowrap no-scrollbar py-1">
+
+      <!-- Not Logged In -->
+      <ng-container *ngIf="!isLoggedIn">
+        <a routerLink="/login" class="whitespace-nowrap px-4 py-2 text-sm font-medium text-slate-600 border border-slate-200 rounded-lg shrink-0">
+          Login
+        </a>
+
+      </ng-container>
+
+      <!-- Logged In -->
+      <ng-container *ngIf="isLoggedIn">
+        <a routerLink="/profile" class="whitespace-nowrap px-4 py-2 text-sm font-medium text-slate-600 border border-slate-200 rounded-lg shrink-0">
+          My Profile
+        </a>
+        
+        <a routerLink="posts/create" class="whitespace-nowrap px-4 py-2 text-sm font-bold text-white bg-blue-600 rounded-lg shrink-0 flex items-center gap-2">
+          Create Post
+        </a>
+
+        <button (click)="onLogout()" class="whitespace-nowrap px-4 py-2 text-sm font-medium text-red-500 hover:bg-red-50 shrink-0 cursor-pointer">
+          Logout
+        </button>
+      </ng-container>
+
+    </div>
+  </div>
+</nav>

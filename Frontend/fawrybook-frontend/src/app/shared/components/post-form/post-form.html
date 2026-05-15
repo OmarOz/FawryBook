@@ -1,0 +1,113 @@
+<div class="max-w-3xl mx-auto px-4 py-10">
+  
+  <!-- Page Header -->
+  <div class="mb-8">
+    <h1 class="text-3xl font-extrabold text-slate-900">Create New Post</h1>
+    <p class="text-slate-500 mt-2">Share your thoughts with the FawryBook community.</p>
+  </div>
+
+  <form [formGroup]="postForm" (ngSubmit)="submitForm()" class="space-y-6">
+    
+    <!-- Main Content Card -->
+    <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+      
+      <!-- Title Input -->
+      <div>
+        <label class="block text-sm font-semibold text-slate-700 mb-1">Post Title</label>
+        <input
+          type="text"
+          placeholder="Enter a catchy title..."
+          formControlName="title"
+          class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all placeholder:text-slate-400"
+        />
+      </div>
+
+      <!-- Content Textarea -->
+      <div>
+        <label class="block text-sm font-semibold text-slate-700 mb-1">Content</label>
+        <textarea
+          placeholder="Write your story here..."
+          formControlName="content"
+          class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all min-h-[250px] placeholder:text-slate-400"
+        ></textarea>
+      </div>
+    </div>
+
+    <!-- Category & Tags Card -->
+    <div class="bg-slate-50 p-6 rounded-2xl border border-slate-200 space-y-6">
+      
+      <!-- Category Selection -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+  <label class="block text-sm font-semibold text-slate-700 mb-1">Category</label>
+  <div class="relative">
+    <select
+      formControlName="categoryId"
+      class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-blue-500 outline-none cursor-pointer text-slate-900 appearance-none"
+    >
+      <!-- Placeholder Option -->
+      <option value="" disabled selected>Select Category</option>
+      
+      <!-- Loop through categories -->
+      @for (category of categories; track category.id) {
+        <option [value]="category.id" class="text-slate-900">
+          {{ category.name }}
+        </option>
+      }
+    </select>
+    
+    <!-- Custom Arrow (Since we used appearance-none) -->
+    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-500">
+      <svg class="h-4 w-4 fill-current" viewBox="0 0 20 20">
+        <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" />
+      </svg>
+    </div>
+  </div>
+</div>
+
+        <!-- Add New Category -->
+        <div>
+          <label class="block text-sm font-semibold text-slate-700 mb-1">Add New Category</label>
+          <div class="flex gap-2">
+            <input
+              #categoryInput
+              type="text"
+              placeholder="Ex: Tech"
+              class="flex-1 px-4 py-3 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-blue-500 outline-none"
+            />
+            <button
+              type="button"
+              (click)="createCategory(categoryInput.value); categoryInput.value=''"
+              class="px-4 py-2 bg-white border border-slate-200 text-blue-600 font-bold rounded-xl hover:bg-blue-50 transition-colors cursor-pointer whitespace-nowrap"
+            >
+              Add
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tags Input -->
+      <div>
+        <label class="block text-sm font-semibold text-slate-700 mb-1">Tags</label>
+        <input
+          type="text"
+          placeholder="Ex: angular, webdev, tutorial"
+          formControlName="tags"
+          class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white focus:ring-2 focus:ring-blue-500 outline-none placeholder:text-slate-400"
+        />
+        <p class="text-[11px] text-slate-400 mt-2 uppercase tracking-wider">Separate tags with commas</p>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="flex justify-end pt-4">
+      <button 
+        type="submit"
+        class="w-full md:w-auto px-10 py-4 bg-blue-600 text-white font-extrabold rounded-xl shadow-lg shadow-blue-200 hover:bg-blue-700 hover:-translate-y-0.5 transition-all active:scale-95 cursor-pointer"
+      >
+        Save Post
+      </button>
+    </div>
+
+  </form>
+</div>

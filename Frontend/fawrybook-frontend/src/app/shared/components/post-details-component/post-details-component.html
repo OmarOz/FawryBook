@@ -1,0 +1,112 @@
+<!-- Loading & Error States -->
+  <div *ngIf="loading" class="flex justify-center items-center py-20 text-slate-500 font-medium">
+    <span class="animate-pulse">Loading post...</span>
+  </div>
+  
+  <div *ngIf="error" class="bg-red-50 text-red-600 p-4 rounded-xl border border-red-100 text-center">
+    Post not found.
+  </div>
+
+  <!-- Main Post Content -->
+  <article *ngIf="post && !loading" class="space-y-8">
+    
+    <!-- Author Actions (Edit/Delete) -->
+    <div *ngIf="isAuthor" class="flex justify-end gap-3 mb-6">
+      <button [routerLink]="['edit']" 
+        class="px-4 py-2 text-sm font-semibold text-blue-600 bg-blue-50 hover:bg-blue-100 rounded-lg transition-colors">
+        Edit Post
+      </button>
+      <button (click)="deletePost()" 
+        class="px-4 py-2 text-sm font-semibold text-red-600 bg-red-50 hover:bg-red-100 rounded-lg transition-colors">
+        Delete
+      </button>
+    </div>
+
+    <!-- Header Section -->
+    <header class="space-y-4">
+      <span class="px-3 py-1 bg-blue-100 text-blue-700 text-xs font-bold uppercase rounded-full">
+        {{ post.category.name }}
+      </span>
+      <!-- Tags Section -->
+      <div class="flex flex-wrap gap-2 mt-4">
+        @for (tag of post.tags; track tag.id) {
+          <span class="px-2 py-1 bg-slate-100 text-slate-600 text-[11px] font-bold uppercase rounded-md border border-slate-200">
+            #{{ tag.name }}
+          </span>
+        }
+      </div>
+      <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 leading-tight mt-5">
+        {{ post.title }}
+      </h1>
+      <div class="flex items-center gap-3 text-slate-500">
+        <div class="w-10 h-10 bg-slate-200 rounded-full flex items-center justify-center font-bold text-slate-600">
+          {{ post.author.username.charAt(0).toUpperCase() }}
+        </div>
+        <div class="text-sm">
+          <p class="font-bold text-slate-900 leading-none mb-1">{{ post.author.username }}</p>
+          <p>{{ post.createdAt | date:'longDate' }}</p>
+        </div>
+      </div>
+    </header>
+
+    <hr class="border-slate-100">
+
+    <!-- Post Body -->
+    <div class="prose prose-slate max-w-none">
+      <p class="text-lg md:text-xl text-slate-700 leading-relaxed whitespace-pre-wrap">
+        {{ post.content }}
+      </p>
+    </div>
+
+    <!-- Engagement Bar (Stats & Reactions) -->
+    <div class="flex flex-wrap items-center justify-between gap-4 py-6 border-y border-slate-100">
+      <div class="flex items-center gap-2">
+        <button (click)="setReaction('LIKE')" 
+          class="flex items-center gap-2 px-4 py-2 rounded-full border border-slate-200 hover:bg-slate-50 transition-all active:scale-95 cursor-pointer">
+          👍 <span class="font-bold">{{ post.likesCount }}</span>
+        </button>
+        <button (click)="setReaction('DISLIKE')" 
+          class="flex items-center gap-2 px-4 py-2 rounded-full border border-slate-200 hover:bg-slate-50 transition-all active:scale-95 cursor-pointer">
+          👎 <span class="font-bold">{{ post.dislikesCount }}</span>
+        </button>
+      </div>
+      
+      <div class="flex items-center gap-6 text-slate-500 font-medium">
+        <span>💬 {{ post.commentsCount }} Comments</span>
+        <span class="text-yellow-600">⭐ {{ post.rating }} Rating</span>
+      </div>
+    </div>
+
+    <!-- Comments Section -->
+    <section class="mt-12 space-y-8">
+      <h3 class="text-2xl font-bold text-slate-900">Comments</h3>
+
+      <!-- Add Comment Form -->
+      <form [formGroup]="commentForm" (ngSubmit)="addComment()" class="space-y-3">
+        <textarea formControlName="comment" placeholder="Write your comment..."
+          class="w-full p-4 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none min-h-[120px] shadow-sm"
+        ></textarea>
+        <div class="flex justify-end">
+          <button type="submit" 
+            class="px-6 py-2 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700 shadow-md transition-all cursor-pointer">
+            Post Comment
+          </button>
+        </div>
+      </form>
+
+      <!-- Comment List -->
+      <div class="space-y-6">
+        <div *ngFor="let comment of post.comments" class="bg-slate-50 p-6 rounded-2xl border border-slate-100">
+          <div class="flex justify-between items-center mb-2">
+            <strong class="text-slate-900">{{ comment.authorUsername }}</strong>
+            <span class="text-xs text-slate-400">{{ comment.createdAt | date:'short' }}</span>
+          </div>
+          <p class="text-slate-700 leading-relaxed">{{ comment.content }}</p>
+        </div>
+
+        <div *ngIf="post.comments?.length === 0" class="text-center py-10 bg-slate-50 rounded-2xl text-slate-400 italic">
+          No comments yet. Be the first to start the conversation!
+        </div>
+      </div>
+    </section>
+  </article>
