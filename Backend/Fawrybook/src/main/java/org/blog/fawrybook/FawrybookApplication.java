@@ -1,0 +1,13 @@
+package org.blog.fawrybook;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class FawrybookApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(FawrybookApplication.class, args);
+	}
+
+}
