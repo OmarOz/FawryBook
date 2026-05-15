@@ -1,10 +1,10 @@
-# 📖 FawryBook — Technical Blogging Platform
+# FawryBook — Technical Blogging Platform
  
 FawryBook is a full-stack technical blogging platform where developers can share knowledge, interact with posts through likes/dislikes and comments, and manage their professional presence.
  
 ---
  
-## 📋 Table of Contents
+## Table of Contents
  
 - [Tech Stack](#tech-stack)
 - [Architecture Overview](#architecture-overview)
@@ -17,7 +17,7 @@ FawryBook is a full-stack technical blogging platform where developers can share
 - [Database Schema](#database-schema)
 ---
  
-## Tech Stack
+## Tech-Stack
  
 | Layer | Technology |
 |-------|-----------|
@@ -31,11 +31,11 @@ FawryBook is a full-stack technical blogging platform where developers can share
  
 ---
  
-## Architecture Overview
+## Architecture-Overview
  
 FawryBook follows a layered architecture on the backend and a component-based architecture on the frontend.
  
-### Backend Architecture
+### Backend-Architecture
  
 ```
 Request → SecurityFilter (JWT) → Controller → Service → Repository → Database
@@ -50,7 +50,7 @@ Request → SecurityFilter (JWT) → Controller → Service → Repository → D
 - **DTOs** — Data Transfer Objects to control what's exposed in the API
 - **Mappers** — MapStruct mappers to convert between entities and DTOs
 - **Security** — JWT filter, UserDetailsService, SecurityConfig
-### Frontend Architecture
+### Frontend-Architecture
  
 ```
 User → Angular Component → Service (HTTP) → Spring Boot API → Database
@@ -77,7 +77,7 @@ User → Angular Component → Service (HTTP) → Spring Boot API → Database
 - **Angular CLI** — Install with `npm install -g @angular/cli`
 ---
  
-### Backend Setup
+### Backend-Setup
  
 #### 1. Start Docker Desktop
 Make sure Docker Desktop is running before proceeding.
@@ -118,7 +118,7 @@ The backend starts on **`http://localhost:8080`**
  
 ---
  
-### Frontend Setup
+### Frontend-Setup
  
 #### 1. Navigate to the Frontend Folder
  
@@ -154,7 +154,7 @@ The frontend starts on **`http://localhost:4200`**
  
 ---
  
-## Project Structure
+## Project-Structure
  
 ### Backend
  
@@ -208,7 +208,7 @@ fawrybook-frontend/src/app/
  
 ---
  
-## API Documentation
+## API-Documentation
  
 **Base URL:** `http://localhost:8080/api/v1`
  
@@ -521,7 +521,7 @@ POST /tags
  
 ---
  
-## Database Schema
+## Database-Schema
  
 The database is automatically created by Hibernate on first startup. The schema consists of 7 tables:
  
