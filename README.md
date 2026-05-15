@@ -17,7 +17,7 @@ FawryBook is a full-stack technical blogging platform where developers can share
 - [Database Schema](#database-schema)
 ---
  
-## 🛠 Tech Stack
+## Tech Stack
  
 | Layer | Technology |
 |-------|-----------|
@@ -31,7 +31,7 @@ FawryBook is a full-stack technical blogging platform where developers can share
  
 ---
  
-## 🏗 Architecture Overview
+## Architecture Overview
  
 FawryBook follows a layered architecture on the backend and a component-based architecture on the frontend.
  
@@ -66,7 +66,7 @@ User → Angular Component → Service (HTTP) → Spring Boot API → Database
 - **Interceptors** — Automatically attaches JWT token to every request
 ---
  
-## ⚙️ Setup Instructions
+## Setup Instructions
  
 ### Prerequisites
  
@@ -154,7 +154,7 @@ The frontend starts on **`http://localhost:4200`**
  
 ---
  
-## 📁 Project Structure
+## Project Structure
  
 ### Backend
  
@@ -208,7 +208,7 @@ fawrybook-frontend/src/app/
  
 ---
  
-## 📡 API Documentation
+## API Documentation
  
 **Base URL:** `http://localhost:8080/api/v1`
  
@@ -217,11 +217,11 @@ fawrybook-frontend/src/app/
 Authorization: Bearer <jwt_token>
 ```
  
-> 💡 **Postman Tip:** The Register and Login requests automatically save the JWT token to the `jwt_token` environment variable via a test script. All other requests use `{{jwt_token}}` automatically.
+>  **Postman Tip:** The Register and Login requests automatically save the JWT token to the `jwt_token` environment variable via a test script. All other requests use `{{jwt_token}}` automatically.
  
 ---
  
-### 🔐 Authentication
+### Authentication
  
 #### Register
 ```
@@ -279,7 +279,7 @@ POST /auth/logout
  
 ---
  
-### 👤 User Profile
+### User Profile
  
 #### Get My Profile
 ```
@@ -315,7 +315,7 @@ PUT /users/me
  
 ---
  
-### 📝 Posts
+### Posts
  
 #### Get All Posts
 ```
@@ -408,7 +408,7 @@ DELETE /posts/{id}
  
 ---
  
-### 💬 Comments
+### Comments
  
 #### Add Comment
 ```
@@ -427,7 +427,7 @@ POST /posts/comment
  
 ---
  
-### 👍 Interactions (Like / Dislike)
+### Interactions (Like / Dislike)
  
 #### Interact with Post
 ```
@@ -447,14 +447,13 @@ POST /posts/interaction
 >
 > **Toggle behavior:**
 > - First interaction → creates it
-> - Same interaction again → removes it (toggle off)
 > - Different interaction → switches from LIKE to DISLIKE or vice versa
  
 **Response:** `200 OK` — updated post object with new counts
  
 ---
  
-### 🏷️ Categories
+### Categories
  
 #### Get All Categories
 ```
@@ -494,7 +493,7 @@ DELETE /categories/{id}
  
 ---
  
-### 🔖 Tags
+### Tags
  
 #### Get All Tags
 ```
@@ -522,13 +521,13 @@ POST /tags
  
 ---
  
-## 🗄️ Database Schema
+## Database Schema
  
 The database is automatically created by Hibernate on first startup. The schema consists of 7 tables:
  
 ```
 users
-  └── id, email, password, username, created_at, updated_at
+  └── id, email, password, username, created_at
  
 categories
   └── id, name
@@ -543,7 +542,7 @@ post_tags  [junction table]
   └── post_id (→posts), tag_id (→tag)
  
 comments
-  └── id, content, post_id (→posts), user_id (→users), created_at, updated_at
+  └── id, content, post_id (→posts), user_id (→users), created_at
  
 post_interactions
   └── id, type (LIKE/DISLIKE), post_id (→posts), user_id (→users), created_at, updated_at
@@ -554,7 +553,7 @@ See `database/schema.sql` for the complete SQL schema.
  
 ---
  
-## 🔑 Key Design Decisions
+## Key Design Decisions
  
 - **JWT Stateless Auth** — No server-side sessions. Tokens expire after 24 hours. Logout is handled via a token blacklist stored in memory.
 - **DTO Pattern** — Entities are never exposed directly in API responses. DTOs control exactly what data is sent to the client, preventing circular references and hiding sensitive fields like passwords.
